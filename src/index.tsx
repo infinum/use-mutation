@@ -131,6 +131,10 @@ export default function useMutation<Input = any, Data = any, Error = any>(
   );
 
   const getMutationFn = useGetLatest(mutationFn);
+  const getOnMutate = useGetLatest(onMutate);
+  const getOnSuccess = useGetLatest(onSuccess);
+  const getOnFailure = useGetLatest(onFailure);
+  const getOnSettled = useGetLatest(onSettled);
   const latestMutation = useRef(0);
 
   const safeDispatch = useSafeCallback(unsafeDispatch);
@@ -150,27 +154,27 @@ export default function useMutation<Input = any, Data = any, Error = any>(
     latestMutation.current = mutation;
 
     safeDispatch({ type: 'MUTATE' });
-    const rollback = (await onMutate({ input })) ?? noop;
+    const rollback = (await getOnMutate()?.({ input })) ?? noop;
 
     try {
       const data = await getMutationFn()(input);
+
+      await getOnSuccess()?.({ data, input });
+      await (config.onSuccess ?? noop)({ data, input });
 
       if (latestMutation.current === mutation) {
         safeDispatch({ type: 'SUCCESS', data });
       }
 
-      await onSuccess({ data, input });
-      await (config.onSuccess ?? noop)({ data, input });
-
-      await onSettled({ status: 'success', data, input });
+      await getOnSettled()?.({ status: 'success', data, input });
       await (config.onSettled ?? noop)({ status: 'success', data, input });
 
       return data;
     } catch (error) {
-      await onFailure({ error, rollback, input });
+      await getOnFailure()?.({ error, rollback, input });
       await (config.onFailure ?? noop)({ error, rollback, input });
 
-      await onSettled({ status: 'failure', error, input, rollback });
+      await getOnSettled()?.({ status: 'failure', error, input, rollback });
       await (config.onSettled ?? noop)({
         status: 'failure',
         error,

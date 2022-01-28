@@ -1,7 +1,7 @@
 {
-  "name": "use-mutation",
+  "name": "@infinumjs/use-mutation",
   "description": "Run functions with side-effects safely in React",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "license": "MIT",
   "author": "Sergio Xalambrí",
   "main": "dist/index.js",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "sergiodxa/use-mutation"
+    "url": "infinum/use-mutation"
   },
   "engines": {
     "node": ">=10"
@@ -37,8 +37,8 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.0.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "husky": "^7.0.1",

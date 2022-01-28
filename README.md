@@ -14,13 +14,13 @@ Specially useful to run requests against an API, and combined with [SWR](https:/
 Install it:
 
 ```sh
-$ yarn add use-mutation
+$ npm install @infinumjs/use-mutation
 ```
 
 Import it:
 
 ```ts
-import useMutation from 'use-mutation';
+import useMutation from '@infinumjs/use-mutation';
 ```
 
 Create a function which runs a mutation
@@ -201,7 +201,9 @@ const promise = mutate(input, {
 
 ## Author
 
-- [Sergio Xalambrí](https://sergiodxa.com) - [Able](https://able.co)
+- [Sergio Xalambrí](https://sergiodxa.com) 
+- [Able](https://able.co)
+- [Ivica Batinić](https://ivicabatinic.from.hr)
 
 ## License
 
